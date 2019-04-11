@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Java Course</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'home\css\bootstrap.min.css' %}" />
+    <script src="main.js"></script>
+
+</head>
+<style>
+    *
+{
+padding:0;
+margin:0;
+}
+nav
+{
+overflow:hidden;
+background-color:#385469;
+}
+nav a
+{
+color:white;
+text-align:center;
+text-decoration:none;
+float:right;
+font-size:25px;
+padding:15px;
+}
+a
+{
+text-decoration: none;
+color:black;
+}
+a:hover
+{
+background-color:rgb(167, 166, 166);
+cursor:pointer;
+text-decoration: none;
+font-size:20px;
+}
+#dropdown
+{
+width: 110px;
+height:150px;
+background-color:rgb(189, 189, 189);
+position:absolute;
+right:0;
+top:80;
+display:none;
+font-size:18px;
+z-index: 99;
+}
+#dropdown ol{
+    list-style-type: none;
+}
+/*#dropdown
+{
+    top:62px;
+}*/
+#dropdown li
+{
+    font-size:15px;
+    padding:15px;
+}
+#dropdown li:hover{
+    display : block;
+    background: rgb(167, 166, 166);
+}
+#dropdown a:hover
+{
+    font-size:15px;
+    color:#ffffff;
+}
+#question
+{
+    font-size:20px;
+}
+#sub
+{
+    width:100px;
+}
+</style>
+<body onclick="remov()">
+    <script>
+
+        function validateAns()
+        {
+            var score = 0;
+            var a1 = document.getElementById("a1");
+            var a2 = document.getElementById("a2");
+            var a3 = document.getElementById("a3");
+            if(a1.checked)
+                score += 1;
+            if(a2.checked)
+                score += 1;
+            if(a3.checked)
+                score += 1;
+
+            document.getElementById("answer").value=score;
+            //document.write(document.getElementById("answer").value);
+        }
+        function drop()
+        {
+            document.getElementById("dropdown").style.display='block';
+        }
+        function remov(){
+            document.getElementById("dropdown").style.display='none';
+        }
+    </script>
+    <nav>
+        <img src="{% static 'home\img\logo1.png' %}" width="55px" height="57px" style="float:left; border-radius:50%;"/><label style="color:white; font-size:25px; padding-left:10px; line-height:55px;">VLearn</label>
+        <img id = "image1" onmouseover="drop()"  src="{{ user.userprofileinfo.profile_pic.url }}" width="55px" height="57px"style="float:right; border-radius:50%;"/>    
+    </nav>
+       <div id="dropdown">
+           <ol>
+               <li><a href="{% url 'home:contactUs' %}">Contact us</a></li>
+               <li><a href="{% url 'home:leaderboard' %}">Leaderboard</a></li>
+               <li><a href="\logout\">Logout</a></li>
+           </ol>
+       </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 border" style="background-color:white; overflow:scroll; height: 90vh;">
+                        <ul type="square" style="padding-left:10px;">
+                            <center><label style="color:black;">Syllabus</label></center>
+                            <a href = "{% url 'home:third_page' %}"><li>Introduction to Programming Languages and Java</li></a><br>
+                            <a href = "{% url 'home:fourth_page' %}"><li>Datatypes in Java.</li></a><br>
+                            <a href = "{% url 'home:fifth_page' %}"><li>Control Structure in Java.</li></a><br>
+                            <a href = "{% url 'home:sixth_page' %}"><li>Classes and Objects</li></a><br>
+                            <a href = "{% url 'home:seventh_page' %}"><li>Scanner and Casting</li></a><br>
+                            <a href = "{% url 'home:eighth_page' %}"><li>Constant and static keyword</li></a><br>
+                            <a href = "{% url 'home:ninth_page' %}"><li>Inheritance</li></a><br>
+                            <a href = "{% url 'home:tenth_page' %}"><li>Abstract Classes</li></a><br>
+                            <a href = "{% url 'home:eleventh_page' %}"><li>Interface</li></a><br>
+                            <a href = "{% url 'home:twelveth_page' %}"><li>Exceptions Handling</li></a><br>
+                            <a href = "{% url 'home:thirteenth_page' %}"><li>Packages</li></a><br>
+                            <a href = "{% url 'home:fourteenth_page' %}"><li>Applet Basics</li></a><br>
+                            <a href = "{% url 'home:fifteenth_page' %}"><li>Conclusion</li></a><br>
+
+
+                        </ul>
+                </div>
+                <div class="col-sm-6 border" >
+                        <video class="border" poster = "{% static 'home\img\jvimg.png' %}" width="700" height="400" controls>
+                            <source src="{{ video_url }}" type="video/webm">
+                                
+                        </video>
+                    </div>
+                    <div class="col-sm-4 border" style="z-index:2; padding-left:25px;">
+                        {% if attended == "True" %}
+                            <h4>You have already submitted this quiz. Thank you. Your score is : {{ score }}</h4>
+
+                        {% else %}
+                        <h1>Quizz</h1>
+                        <form action = "{% url 'home:seventh_page' %}" method="POST">
+                                {% csrf_token %}
+                        <ol>
+                            <li id= "question">Which keyword is used to get the scanner class into our porgram?<br>
+                                <input type="radio" name="q1" value="class" id="a1">import
+                                <input type="radio" name="q1" value="object">package
+                                <input type="radio" name="q1" value="obj">scan
+                                <input type="radio" name="q1" value="obj">scanner
+                            </li><br>
+                            <li id= "question">Which method of the scanner class is used to get an integer?<br>
+                                <input type="radio" name="q2" value="Java Run Elipse">int()
+                                <input type="radio" name="q2" value="Jake is Running">integer()
+                                <input type="radio" name="q2" value="Java Runtime Environment"  id="a2">nextInt()
+                                <input type="radio" name="q2" value="None of the above">None of the above
+                            </li><br>
+                            <li id= "question">Which method is used to get a decimal number?<br>
+                                <input type="radio" name="q3" value="Java Developer Kit" >decimal()<br>
+                                <input type="radio" name="q3" value="Jake Done Kite">nextDecimal()<br>
+                                <input type="radio" name="q3" value="Java Dream Kit">nextLine()<br>
+                                <input type="radio" name="q3" value="Java Development Kit" id="a3">nextDouble()
+                            </li>
+                        </ol>
+                        <input type="hidden" id = "answer" name="score">
+                        <input type="hidden" value="{{ user.username }}" name= "username">
+                        <input type="hidden" value="True" name="attended">
+                        <center><input id= "sub" type= "submit" value="Submit" onclick="validateAns()"></center>
+                    </form>
+                    {% endif %}
+                        </div>
+            </div>
+        </div>
+</body>
+</html>

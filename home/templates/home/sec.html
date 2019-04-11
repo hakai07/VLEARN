@@ -1,0 +1,216 @@
+<html>
+<head>
+
+<title>VLearn</title>
+{% load staticfiles %}
+<style>
+    
+*
+{
+padding:0;
+margin:0;
+}
+nav
+{
+overflow:hidden;
+background-color:#385469;
+}
+nav a
+{
+color:white;
+text-align:center;
+text-decoration:none;
+float:right;
+font-size:25px;
+padding:15px;
+}
+a
+{
+text-decoration: none;
+color:black;
+}
+a:hover
+{
+background-color:grey;
+cursor:pointer;
+text-decoration: none;
+font-size:20px;
+}
+#track
+{
+width:100%;
+height:500px;
+background:url({% static 'home/img/background1.jpeg' %}) no-repeat 30%;
+background-size:cover;
+}
+#content
+{
+width:80%;
+height:500px;
+margin:0 auto;
+background-color:#0000008f;
+}
+#dp
+{
+padding:70px;
+margin-left:150px;
+border-radius:20%;
+}
+#details
+{
+width:350px;
+height:250px;
+float:right;
+padding:50px;
+position:relative;
+left:-15%;
+top:10%;
+line-height:45px;
+}
+label
+{
+color:white;
+font-size:25px;
+font-family:Maiandra GD;
+}
+
+h3
+{
+font-family:Maiandra GD;
+font-size:30px;
+color:#3b3b7d;
+}
+h5
+{
+font-family:Maiandra GD;
+font-size:20px;
+color:#20419f;
+padding-left:200px;
+padding-top:25px;
+}
+#sylabus-content
+{
+width:80%;
+height:790px;
+margin:0 auto;
+background-color:#92929299;
+}
+h5 a
+{
+color:#3b3b7d;
+text-decoration:none;
+font-size:25px;
+}
+#next_page
+{
+    width:1000px;
+    margin:0 auto;
+}
+span{
+    color:black;
+    font-size: 50px;
+    font-family: sans-serif;
+}
+#button1
+{
+    outline:none;
+    width:50%;
+
+    background-Color:white;
+    color:#385469;
+    transition:0.5s ease;
+    border-radius: 100px;
+    border: 1px solid #385469;
+    font-size: 25px;
+    padding:20px;
+}
+#button1:hover
+{
+    background-color: #385469;
+    color:white;
+    cursor:pointer;
+}
+#footer1
+{
+width:100%;
+color: #467927;
+position:absolute;
+background-color: #000000;
+bottom:0;
+}
+#dropdown
+{
+width: 110px;
+height:150px;
+background-color:rgb(189, 189, 189);
+position:absolute;
+right:0;
+top:80;
+display:none;
+font-size:18px;
+}
+#dropdown ol{
+    list-style-type: none;
+}
+#dropdown
+{
+    top:62px;
+}
+#dropdown li
+{
+    font-size:15px;
+    padding:15px;
+}
+#dropdown li:hover{
+    display : block;
+    background: rgb(167, 166, 166);
+}
+#dropdown a:hover
+{
+    font-size:15px;
+    color:#ffffff;
+}
+</style>
+</head>
+<script>
+    function drop()
+        {
+            document.getElementById("dropdown").style.display='block';
+        }
+        function remov(){
+            document.getElementById("dropdown").style.display='none';
+        }
+</script>
+<body onclick="remov()">
+        <nav>
+                <img src="{% static 'home\img\logo1.png' %}" width="55px" height="57px" style="float:left; border-radius:50%;"/><label style="color:white; font-size:25px; padding-left:10px; line-height:55px;">VLearn</label>
+                <img id = "image1" onmouseover="drop()"  src="{{ user.userprofileinfo.profile_pic.url }}" width="55px" height="57px"style="float:right; border-radius:50%;"/>    
+            </nav>
+               <div id="dropdown">
+                   <ol>
+                       <li><a hre="{% url 'home:contactUs' %}">Contact us</a></li>
+                       <li><a href="{% url 'home:leaderboard' %}">Leaderboard</a></li>
+                       <li><a href="\logout\">Logout</a></li>
+                   </ol>
+               </div>
+<div id="track">
+<div id="content">
+<img src="{{ user.userprofileinfo.profile_pic.url }}" width="300px" height="300px" id="dp">
+<div id="details">
+<p><label>{{ user.username }}</label></p><br>
+<p><label>PROGRAMMING USING JAVA</label></p><br>
+<p><label>PROGRESS</label></p><br>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id = "next_page">
+<span>Let's learn some java code from the scratch.</span><br><br>
+<center><a href="{% url 'home:third_page' %}"><input type="button" value = "Start" id= "button1" /></a></center>
+</div>
+<footer id="footer1">
+    <center><h5>All rights reserved. &copy; 2k18</h5></center>
+</footer>
+</body>
+</html>

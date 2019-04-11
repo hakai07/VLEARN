@@ -1,0 +1,182 @@
+<html>
+<head>
+        {% load staticfiles %}
+<link rel = "icon" href= "{% static 'home\img\logo1.png' %}"/>
+<title>VLearn</title>
+
+<style>
+*
+{
+margin:0;
+padding:0;
+}
+#header
+{
+height:30px;
+background-color: black;
+}
+#mainPage
+{
+width:100%;
+height:100%;
+background:url({% static 'home/img/background1.jpeg' %}) no-repeat;
+background-size:cover;
+}
+#content
+{
+z-index:99;
+}
+#left
+{
+
+height:100%;
+width:60%;
+background-color:black;
+opacity:0.7;
+}
+#image1
+{
+margin-top:200px;
+margin-left:350px;
+border-radius:50%;
+z-index:99;
+}
+h4
+{
+font-size:20px;
+padding: 100px;
+color:#30519e;	
+font-family:Lucida Handwriting;
+}
+#login
+{
+width:350px;
+height:525px;
+position: absolute;
+padding:50px;
+right:8%;
+top:14%;
+box-sizing:border-box;
+background:linear-gradient(115deg,#18b5cede,#36358dd6);
+box-shadow:0px 0px 18px black;
+border-radius:4px;
+z-index:1;
+}
+input[type="text"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+}
+input[type="password"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+}
+input[type="submit"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+color:grey;
+width:100%;
+border-radius:10px;
+font-family:Comic Sans MS;
+}
+input[type="submit"]:hover
+{
+cursor:pointer;
+color:white;
+background-color: #293577;
+}
+input[type="submit"]:focus
+{
+outline:none;
+}
+input[type="submit"]:active
+{
+outline:none;
+}
+h2
+{
+font-size:45px;
+font-family:Lucida Fax;
+color: white;
+}
+#labelText
+{
+color:white;
+font-size:20px;
+padding-left:-5px;
+}
+#hyperLink
+{
+color:white;
+font-size:17px;
+text-decoration:none;
+}
+#hyperLink:hover
+{
+text-decoration:none;
+color:#5db6d2;
+}
+#footer1
+{
+width:100%;
+margin-top:0px;
+color: #467927;
+background-color: #000000;
+line-height:2;
+
+}
+h5
+{
+position: relative;
+top:6px;
+margin-left:110px;
+font-size:20px;
+color:#467927;
+}
+::placeholder
+{
+    color:rgb(201, 191, 191);
+}
+</style>
+</head>
+<body>
+<header id="header"></header>
+<div id = "mainPage">
+<div id="content">
+<div id="left">
+<img src= "{% static 'home\img\logo1.png' %}" width="200px" height= "200px" id="image1"></img>
+<h4>Welcome to Vlearn. Over here you will learn about the java programming language.These tutorials has been made interactive for better user experience.
+<br>Hope you guys have a good time.</h4>
+</div>
+</div>
+<div id= "login">
+<br><br>
+<center><h2>SIGN IN</h2><br><br><br>
+<form action = "{% url 'home:user_login' %}" method = "POST">
+{% csrf_token %}
+<input type= "text" placeholder="Username" name="username"/><br><br><br>
+<input type="password" placeholder="Password" name="password"/><br><br><br>
+<input type="submit" value="Login"/><br><br><br></center>
+<label id="labelText">Not yet signed up?&emsp;<a href = "{% url 'home:register' %}" id="hyperLink">Sign Up</a></label>
+</div>
+</form>
+<footer id="footer1">
+<center><h5>All rights reserved. &copy; 2k18</h5></center>
+</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LeaderBoard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'home\css\bootstrap.min.css' %}" />
+    <script src="main.js"></script>
+<style>
+   nav
+{
+overflow:hidden;
+background-color:#385469;
+}
+nav a
+{
+color:white;
+text-align:center;
+text-decoration:none;
+
+font-size:25px;
+padding:15px;
+}
+a
+{
+text-decoration: none;
+color:black;
+}
+a:hover
+{
+background-color:grey;
+cursor:pointer;
+text-decoration: none;
+font-size:20px;
+}
+#track
+{
+width:100%;
+height:500px;
+background:url({% static 'home/img/background1.jpeg' %}) no-repeat 30%;
+background-size:cover;
+}
+#content
+{
+width:80%;
+height:500px;
+margin:0 auto;
+background-color:#0000008f;
+}
+#dp
+{
+padding:70px;
+margin-left:150px;
+border-radius:20%;
+}
+label
+{
+color:white;
+font-size:25px;
+font-family:Maiandra GD;
+}
+#button1:hover
+{
+    background-color: #385469;
+    color:white;
+    cursor:pointer;
+}
+
+#dropdown
+{
+width: 110px;
+height:145px;
+background-color:rgb(189, 189, 189);
+position:absolute;
+right:0;
+top:50;
+display:none;
+font-size:18px;
+z-index : 2;
+}
+#dropdown ol{
+    list-style-type: none;
+    
+}
+#dropdown
+{
+    top:62px;
+    
+}
+#dropdown li
+{
+    font-size:15px;
+    padding:10px;
+    margin-left:-40px;
+}
+#dropdown li:hover{
+    display : block;
+    background: rgb(167, 166, 166);
+}
+#dropdown a:hover
+{
+    font-size:15px;
+    color:#ffffff;
+}
+</style>
+<script>
+        function drop()
+            {
+                document.getElementById("dropdown").style.display='block';
+            }
+            function remov(){
+                document.getElementById("dropdown").style.display='none';
+            }
+    </script>
+</head>
+
+<body onclick = "remov()">
+        <nav>
+                <a href="{% url 'home:third_page' %}"><img src="{% static 'home\img\logo1.png' %}" width="55px" height="57px" style="float:left; border-radius:50%;"/></a>
+                <img id = "image1" onmouseover="drop()"  src="{{ user.userprofileinfo.profile_pic.url }}" width="55px" height="57px"style="float:right; border-radius:50%;"/>    
+            </nav>
+            <div id="dropdown">
+                    <ol>
+                        <li><a hre="">Contact us</a></li>
+                        <li><a href="{% url 'home:leaderboard' %}">Leaderboard</a></li>
+                        <li><a href="\logout\">Logout</a></li>
+                    </ol>
+                </div>
+    <div>
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4 border">
+                           <h2>Rank</h2>
+                           <ol>
+                                {% for score in scores %}
+                                <b><br><li></li><br></b>
+                                
+                         {% endfor %}  
+                           </ol>
+                        </div>
+                        <div class="col-sm-4 border" >
+                                <h2>Name</h2>
+                                  
+                                {% for score in scores %}
+                                        <b><br>{{ score.username }}<br><br></b>
+                                 {% endfor %}
+                        </div>
+                        <div class="col-sm-4 border">
+                                <h2>Score</h2>
+                                {% for score in scores %}
+                                    <b><br>{{ score.totalScore }}<br><br></b>
+                           {% endfor %}
+                        </div>
+    </div>
+</body>
+</html>

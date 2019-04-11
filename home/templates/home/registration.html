@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>
+Register
+</title>
+{% load staticfiles %}
+<style>
+*
+{
+margin:0;
+padding:0;
+}
+#register
+{
+width:100%;
+height:100%;
+background:url({% static 'home/img/background1.jpeg' %}) no-repeat;
+background-size:cover;
+}
+input[type="text"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+color:white;
+}
+input[type="number"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+color:white;
+}
+input[type="email"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+color:white;
+}
+input[type="password"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+outline:none;
+border:none;
+border-bottom:1px solid white;
+font-family:Comic Sans MS;
+color:white;
+}
+input[type="submit"]
+{
+font-size:20px;
+background-color:transparent;
+padding:5px;
+color:white;
+width:50%;
+border-radius:10px;
+font-family:Comic Sans MS;
+}
+input[type="submit"]:hover
+{
+cursor:pointer;
+color:white;
+background-color: #293577;
+}
+input[type="submit"]:focus
+{
+outline:none;
+}
+input[type="submit"]:active
+{
+outline:none;
+}
+form
+{
+height:712px;
+width:30%; 
+margin-left:550px;
+padding-top:80px;
+background:linear-gradient(45deg,black,#315763);
+
+}
+h2
+{
+font-size:45px;
+font-family:Lucida Fax;
+color: white;
+}
+p
+{
+font-size:25px;
+color:grey;
+}
+</style>
+
+</head>
+<body>
+{% if registered %}
+<h1>Thank you for registering. Click <a href="{% url 'home:user_login' %}">here</a> to continue.</h1>
+{% else %}
+<div id = "register">
+		<script>
+			var passMatch,ageVerify;
+				function checkpass()
+				{
+					var a = document.getElementById("pass").value;
+					var b = document.getElementById("cpass").value;
+					if(b != a)
+					{
+						document.getElementById("errorPass").innerHTML = "password and c pass doesnt match";
+						passMatch = 1;
+					}
+					else
+					{
+						document.getElementById("errorPass").innerHTML = "";
+						passMatch = 0;
+					}
+				}
+				function checkage()
+				{
+					var a =  document.getElementById("age").value;
+					if(a < 12 || a >= 100)
+					{
+						ageVerify=1;
+						document.getElementById("errorAge").innerHTML = "Invalid Age";
+					}
+					else
+					{
+						document.getElementById("errorAge").innerHTML = "";
+						ageVerify=0;
+					}
+				}
+				function validateForm()
+					{
+						if(passMatch == 1 || ageVerify == 1)
+						{
+							document.write("Invalid Details");
+						}
+					}
+				</script>
+<form id = "form1" action = "{% url 'home:register' %}" method="post" enctype="multipart/form-data" >
+{% csrf_token %}
+<center><h2>SIGN UP</h2><br><br>
+<input type= "text" placeholder="Username" name= "username" id ="username" required/><br><br><br>
+<input type="email" placeholder="Email Id" name="email" id = "email" onfocusout="checkemail()" required/><br><br><br>
+<input type="password" placeholder="Password" name="password" id = "pass" required/><br><br><br>
+<input type="password" placeholder="Confirm-Password" id= "cpass" onfocusout="checkpass()"required/><br><br>
+<label id="errorPass" style="color:red;"></label><br>
+<input type="number" placeholder="Age" id = "age" onfocusout="checkage()" required><br><br><br>
+<label id="errorAge" style="color:red;"></label>
+{% for field in user_form %}
+{% for error in field.errors %}
+	<p style="color:red;">{{error}}</p>
+{% endfor %}
+{% endfor %}
+{{ profile_form.as_p }}<br><br><br><br><br>
+<input type="submit" value="Submit" id="submitbtn" onclick="validateForm()"/></center>
+</form>
+</div>
+{% endif %}
+</body>
+</html>
